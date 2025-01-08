@@ -5,14 +5,15 @@ import { catchError, map } from 'rxjs/operators';
 
 // Declaring the API URL that will provide data for the client app
 const apiUrl = 'https://myflixmovies123-d3669f5b95da.herokuapp.com/';
-
 @Injectable({
   providedIn: 'root',
 })
 
 export class FetchApiDataService {
-  constructor(private http: HttpClient) {}
-
+    // Inject the HttpClient module to the constructor params
+    // This will provide HttpClient to the entire class, making it available via this.http
+    constructor(private http: HttpClient) {
+    }
 
   private getToken(): string {
     return localStorage.getItem('token') || '';

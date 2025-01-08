@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // Declaring the API URL that will provide data for the client app
-const apiUrl = 'https://myflix-app-123.netlify.app/#/';
+const apiUrl = 'https://myflixmovies123-d3669f5b95da.herokuapp.com/';
 
 @Injectable({
   providedIn: 'root',

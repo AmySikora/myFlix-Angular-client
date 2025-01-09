@@ -9,7 +9,12 @@
     >
       Sign Up
     </button>
-    <button mat-raised-button color="primary" class="custom-button">
+    <button 
+    mat-raised-button 
+    (click)="openUserLoginDialog()"
+    color="primary" 
+    class="custom-button"
+    >
       Log In
     </button>
   </div>

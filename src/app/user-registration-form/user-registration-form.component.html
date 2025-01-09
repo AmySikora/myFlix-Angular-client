@@ -10,9 +10,11 @@
         <input
           matInput
           [(ngModel)]="userData.Username"
+          id="username"
+          name="username"
+          autocomplete="username"
           placeholder="Username"
           type="text"
-          name="Username"
           required
         />
       </mat-form-field>
@@ -20,9 +22,11 @@
         <input
           matInput
           [(ngModel)]="userData.Password"
-          placeholder="Password"
+          id="password"
+          name="password"
+          autocomplete="new-password"
           type="password"
-          name="Password"
+          placeholder="Password"
           required
         />
       </mat-form-field>
@@ -30,9 +34,11 @@
         <input
           matInput
           [(ngModel)]="userData.Email"
-          placeholder="Email"
+          id="email"
+          name="email"
+          autocomplete="email"
           type="email"
-          name="Email"
+          placeholder="Email"
           required
         />
       </mat-form-field>
@@ -40,19 +46,17 @@
         <input
           matInput
           [(ngModel)]="userData.Birthday"
-          placeholder="Birthday"
+          id="birthday"
+          name="birthday"
+          autocomplete="bday"
           type="date"
-          name="Birthday"
+          placeholder="Birthday"
         />
       </mat-form-field>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="registerUser()"
-    >
+    <button mat-raised-button (click)="registerUser()" color="primary">
       Sign Up
     </button>
   </mat-card-actions>

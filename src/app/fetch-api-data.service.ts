@@ -16,11 +16,14 @@ export class FetchApiDataService {
 
   // User registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails); // Debugging log
     return this.http.post(apiUrl + 'users', userDetails).pipe(
-      catchError(this.handleError)
+      map((response: any) => response),
+      catchError((error) => {
+        console.error(`Error Status code ${error.status}, Error body is: `, error.error);
+        return throwError(() => error); 
+      })
     );
-  }
+  }  
 
   // User login endpoint
   public userLogin(userDetails: { Username: string; Password: string }): Observable<any> {

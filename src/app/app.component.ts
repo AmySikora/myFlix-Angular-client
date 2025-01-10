@@ -31,4 +31,12 @@ export class AppComponent {
       autoFocus: true,
     });
   }
+
+  // Function to open movies dialog
+  openMoviesDialog(): void {
+    this.dialog.open(MovieCardComponent, {
+      width: '500'
+
+    })
+  }
 }

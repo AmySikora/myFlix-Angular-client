@@ -31,8 +31,9 @@ export class FetchApiDataService {
       map((response: any) => {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
-        }
+          localStorage.setItem('user', JSON.stringify(response.user));
         return response;
+        }
       }),
       catchError(this.handleError)
     );

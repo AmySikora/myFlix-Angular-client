@@ -1,0 +1,41 @@
+/* src/app/movie-card/movie-card.component.scss */
+.movie-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  .movie-card {
+    flex: 1 1 calc(25% - 32px); /* Responsive layout with 4 cards per row */
+    max-width: 300px;
+    min-width: 250px;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .movie-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .movie-director {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .movie-image {
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .movie-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+  }
+  

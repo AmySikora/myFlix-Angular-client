@@ -1,15 +1,9 @@
 // src/app/user-login-form/user-login-form.component.ts
 import { Component, OnInit, Input } from '@angular/core';
-
-// You'll use this import to close the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
-
-// This import brings in the API calls we created in 6.2
 import { FetchApiDataService } from '../fetch-api-data.service';
-
-// This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -17,40 +11,46 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-login-form.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
-
   @Input() userData = { Username: '', Password: '' };
 
-constructor(
+  constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {}
+
+  // This is the function responsible for sending the form inputs to the backend
+  loginUser(): void {
+    this.fetchApiData.userLogin(this.userData).subscribe({
+      next: (result) => {
+        // Logic for a successful user login
+        this.dialogRef.close(); // Close the modal on success
+        this.snackBar.open('User successfully logged in', 'OK', {
+          duration: 2000,
+        });
+
+        // Save token and user information to localStorage
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('user', JSON.stringify(result.user));
+
+        // Navigate to movies page
+        this.router.navigate(['movies']);
+      },
+      error: (error) => {
+        console.error('Error during login:', error);
+        const errorMessage = error?.error?.errors
+          ? error.error.errors.map((err: { msg: string }) => err.msg).join(', ')
+          : 'Invalid username or password. Please try again.';
+        this.snackBar.open(errorMessage, 'OK', {
+          duration: 3000,
+        });
+      },
+      complete: () => {
+        console.log('User login request completed.');
+      },
+    });
+  }
 }
-
-// This is the function responsible for sending the form inputs to the backend
-loginUser(): void {
-  this.fetchApiData.userLogin(this.userData).subscribe({
-    next: (result) => {
-      // Logic for a successful user log in
-      this.dialogRef.close(); // Close the modal on success
-      this.snackBar.open('User successfully logged in', 'OK', {
-        duration: 2000,
-      });
-    },
-    error: (error) => {
-      console.error('Error during log in', error);
-      const errorMessage = error?.error?.errors
-        ? error.error.errors.map((err: { msg: string }) => err.msg).join(', ')
-        : 'Something went wrong. Please try again.';
-      this.snackBar.open(errorMessage, 'OK', {
-        duration: 3000,
-      });
-    },
-    complete: () => {
-      console.log('User log in request completed.');
-    },
-  });
-}}
-
-

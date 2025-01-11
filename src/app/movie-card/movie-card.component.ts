@@ -20,13 +20,14 @@ export class MovieCardComponent implements OnInit {
 
   goToGenre(genre: any): void {
     this.router.navigate(['genre'], { queryParams: { name: genre.Name } });
+    this.router.navigate(['genre'], { queryParams: { description: genre.Description }});
   }
 
   goToDirector(director: any): void {
     this.router.navigate(['director'], { queryParams: { name: director.Name } });
   }
 
-  goToSynopsis(movie: any): void {
-    this.router.navigate(['synopsis'], { queryParams: { id: movie._id } });
+  goToDescription(movie: any): void {
+    this.router.navigate(['description'], { queryParams: { id: movie._id } });
   }
 }

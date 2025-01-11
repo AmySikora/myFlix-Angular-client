@@ -4,14 +4,14 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
-import { SynopsisComponent } from './synopsis/synopsis.component';
+import { DescriptionComponent } from './description/description.component';
 
 const routes: Routes = [
    {path: 'welcome', component: WelcomePageComponent },
    {path: 'movies', component: MovieCardComponent},
    {path: 'genre', component: GenreComponent},
    {path: 'director', component: DirectorComponent},
-   {path: 'synopsis', component: SynopsisComponent},
+   {path: 'description', component: DescriptionComponent},
 ];
 
 @NgModule({

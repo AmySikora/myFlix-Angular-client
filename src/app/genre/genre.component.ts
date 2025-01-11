@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MyService } from '../services/my-service.service';
 
 @Component({
@@ -13,13 +13,16 @@ export class GenreComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private myService: MyService
+    private myService: MyService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.genreName = params['name'];
-      this.genreDescription = params['description']
+      if (this.genreName) {
+        this.fetchGenreDetails(this.genreName);
+      }
     });
   }
 
@@ -27,5 +30,9 @@ export class GenreComponent implements OnInit {
     this.myService.getGenreByName(name).subscribe((genre) => {
       this.genreDescription = genre?.Description || 'Description not available';
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/movies']);
   }
 }

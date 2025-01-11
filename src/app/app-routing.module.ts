@@ -12,6 +12,7 @@ const routes: Routes = [
    {path: 'genre', component: GenreComponent},
    {path: 'director', component: DirectorComponent},
    {path: 'description', component: DescriptionComponent},
+   {path: '', redirectTo: '/movies', pathMatch: 'full' },
 ];
 
 @NgModule({

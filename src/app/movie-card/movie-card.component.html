@@ -1,3 +1,12 @@
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Search for movies, directors, or genres"
+    (keyup)="onSearch()"
+  />
+</div>
+
 <div class="movie-card-container">
   <mat-card *ngFor="let movie of movies;" class="movie-card">
     <img
@@ -12,16 +21,15 @@
     <mat-card-content>
       <p class="movie-director">Directed by: {{ movie.Director.Name }}</p>
       <p class="movie-genre">Genre: {{ movie.Genre.Name }}</p>
-      <p class="movie-description">{{ getShortDescription(movie.Description) }}</p>
     </mat-card-content>
-    <mat-card-actions class="card-buttons">
+    <mat-card-actions>
       <button mat-raised-button color="primary" (click)="goToGenre(movie.Genre)">
         Genre
       </button>
       <button mat-raised-button color="primary" (click)="goToDirector(movie.Director)">
         Director
       </button>
-      <button mat-raised-button color="primary" (click)="goToDescription(movie.Description)">
+      <button mat-raised-button color="primary" (click)="goToDescription(movie)">
         Description
       </button>
       <button mat-icon-button color="warn" aria-label="Add to favorites">

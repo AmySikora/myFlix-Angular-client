@@ -9,13 +9,25 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  filteredMovies: any[] = [];
+  searchQuery: string = '';
 
   constructor(private fetchApiData: FetchApiDataService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchApiData.getAllMovies().subscribe((movies: any[]) => {
       this.movies = movies;
+      this.filteredMovies = movies;
     });
+  }
+
+  onSearch(): void {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredMovies = this.movies.filter((movie) =>
+      movie.Title.toLowerCase().includes(query) ||
+      movie.Director.Name.toLowerCase().includes(query) ||
+      movie.Genre.Name.toLowerCase().includes(query)
+    );
   }
 
   goToGenre(genre: any): void {
@@ -38,14 +50,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  getShortDescription(description: string): string {
-    if (!description) return '';
-    // Split the description by sentences and return the first one
-    const sentences = description.split('.');
-    return sentences.length > 0 ? sentences[0] + '.' : '';
-  }
-
-  goToDescription(description: string): void {
-    console.log('Movie description:', description);
+  goToDescription(movie: any): void {
+    this.router.navigate(['description'], {
+      queryParams: {
+        title: movie.Title,
+        description: movie.Description,
+      },
+    });
   }
 }

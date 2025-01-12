@@ -1,18 +1,29 @@
-<div class="search-bar">
-  <input
-    type="text"
-    [(ngModel)]="searchQuery"
-    placeholder="Search for movies, directors, or genres"
-    (keyup)="onSearch()"
-  />
+<div class="search-bar-container">
+  <mat-form-field appearance="outline" class="search-bar-wrapper">
+    <mat-icon matPrefix>search</mat-icon>
+    <input
+      matInput
+      class="search-bar"
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="movies, directors genres"
+      (keyup.enter)="onSearch()"
+    />
+    <button
+      mat-button
+      *ngIf="searchQuery"
+      matSuffix
+      color="primary"
+      (click)="clearSearch()"
+      aria-label="Clear search"
+    >
+      Clear
+    </button>
+  </mat-form-field>
 </div>
 
-<div *ngIf="filteredMovies.length === 0" class="no-results">
-  <p>No results found for "{{ searchQuery }}".</p>
-</div>
-
-<div class="movie-card-container">
-  <mat-card *ngFor="let movie of movies;" class="movie-card">
+<div *ngIf="filteredMovies.length > 0" class="movie-card-container">
+  <mat-card *ngFor="let movie of filteredMovies;" class="movie-card">
     <img
       mat-card-image
       [src]="movie.ImageURL"
@@ -41,4 +52,8 @@
       </button>
     </mat-card-actions>
   </mat-card>
+</div>
+
+<div *ngIf="filteredMovies.length === 0 && searchQuery" class="no-results">
+  <p>No results found for "{{ searchQuery }}".</p>
 </div>

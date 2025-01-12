@@ -21,6 +21,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.filteredMovies = this.movies; 
+  }
+  
   onSearch(): void {
     const query = this.searchQuery.toLowerCase().trim();
     this.filteredMovies = this.movies.filter((movie) =>
@@ -28,7 +33,7 @@ export class MovieCardComponent implements OnInit {
       movie.Director.Name.toLowerCase().includes(query) ||
       movie.Genre.Name.toLowerCase().includes(query)
     );
-  }  
+  }
 
   goToGenre(genre: any): void {
     this.router.navigate(['genre'], {

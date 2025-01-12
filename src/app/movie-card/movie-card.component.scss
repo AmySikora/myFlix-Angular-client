@@ -53,32 +53,43 @@
     flex-grow: 1; /* Ensures the description takes up available space */
   }
 
-  .search-bar {
-    width: 100%;
+  .search-bar-container {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; /* Space between the input and buttons */
+    padding-left: 20px; /* Padding from the left margin */
     margin-bottom: 20px;
-
-    .no-results {
-      text-align: center;
-      font-size: 18px;
-      color: #888;
-      margin-bottom: 20px;
-    }    
+  }
   
-    input {
-      width: 60%; /* Make the input box wider */
-      padding: 12px 20px;
-      font-size: 18px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      outline: none;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: border-color 0.3s ease;
+  .search-bar-wrapper {
+    flex-grow: 1;
+    max-width: 900px; /* Increased max-width for a longer search bar */
+  }
   
-      &:focus {
-        border-color: #3f51b5; /* Change border color on focus */
-      }
+  .search-bar {
+    width: 100%; /* Take up the full width of the wrapper */
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 20px; /* Rounded corners */
+    border: 2px solid #3f51b5; /* Matches button color */
+    box-shadow: 0 2px 4px rgba(63, 81, 181, 0.2); /* Subtle shadow */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+    &:focus {
+      border-color: #ff5722; /* Highlight color on focus */
+      box-shadow: 0 4px 8px rgba(255, 87, 34, 0.2);
+    }
+  
+    &::placeholder {
+      font-style: italic;
+      color: #aaa;
     }
   }  
+}  
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    max-width: 100%; /* Use the full width on smaller screens */
+  }
 }

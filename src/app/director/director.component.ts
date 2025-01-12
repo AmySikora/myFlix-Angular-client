@@ -9,7 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DirectorComponent implements OnInit {
   directorName: string = '';
   directorBio: string = '';
-  directorBirthYear: string = '';
+  directorBirth: string = '';
+  directorDeath: string = ''; 
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -18,11 +19,12 @@ export class DirectorComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.directorName = params['name'] || 'Unknown';
       this.directorBio = params['bio'] || 'Biography not available';
-      this.directorBirthYear = params['birthYear'] || 'Birth year not available';
+      this.directorBirth = params['birth'] || 'Birth date not available';
+      this.directorDeath = params['death'] || ''; 
     });
   }
 
   goBack(): void {
-    this.router.navigate(['/movies']); // Navigate back to the movies list
+    this.router.navigate(['/movies']); 
   }
 }

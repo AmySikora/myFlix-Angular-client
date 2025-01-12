@@ -32,7 +32,8 @@ export class MovieCardComponent implements OnInit {
       queryParams: {
         name: director.Name,
         bio: director.Bio,
-        birthYear: director.BirthYear,
+        birth: director.Birth,
+        death: director.Death || '',
       },
     });
   }

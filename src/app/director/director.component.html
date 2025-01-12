@@ -1,6 +1,7 @@
 <div class="director-details">
     <h2>{{ directorName }}</h2>
     <p><strong>Biography:</strong> {{ directorBio }}</p>
-    <p><strong>Born:</strong> {{ directorBirthYear }}</p>
-    <button mat-raised-button color="primary" (click)="goBack()">Back to Movies</button>
-  </div>
+    <p><strong>Born:</strong> {{ directorBirth }}</p>
+    <p *ngIf="directorDeath"><strong>Died:</strong> {{ directorDeath }}</p>
+  <button mat-raised-button color="primary" (click)="goBack()">Back to Movies</button>
+</div>

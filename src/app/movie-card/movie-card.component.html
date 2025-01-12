@@ -7,6 +7,10 @@
   />
 </div>
 
+<div *ngIf="filteredMovies.length === 0" class="no-results">
+  <p>No results found for "{{ searchQuery }}".</p>
+</div>
+
 <div class="movie-card-container">
   <mat-card *ngFor="let movie of movies;" class="movie-card">
     <img

@@ -10,7 +10,7 @@ const routes: Routes = [
    {path: 'welcome', component: WelcomePageComponent },
    {path: 'movies', component: MovieCardComponent},
    {path: 'genre', component: GenreComponent},
-   {path: 'director', component: DirectorComponent},
+   {path: 'director', component: DirectorComponent },
    {path: 'description', component: DescriptionComponent},
    {path: '', redirectTo: '/movies', pathMatch: 'full' },
 ];

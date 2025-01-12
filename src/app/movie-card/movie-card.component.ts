@@ -28,7 +28,13 @@ export class MovieCardComponent implements OnInit {
   }
 
   goToDirector(director: any): void {
-    this.router.navigate(['director'], { queryParams: { name: director.Name } });
+    this.router.navigate(['director'], {
+      queryParams: {
+        name: director.Name,
+        bio: director.Bio,
+        birthYear: director.BirthYear,
+      },
+    });
   }
 
   getShortDescription(description: string): string {

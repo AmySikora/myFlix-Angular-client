@@ -1,41 +1,55 @@
-/* src/app/movie-card/movie-card.component.scss */
 .movie-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures content is spaced properly */
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
   }
-  
-  .movie-card {
-    flex: 1 1 calc(25% - 32px); /* Responsive layout with 4 cards per row */
-    max-width: 300px;
-    min-width: 250px;
-    margin: 8px;
-    display: flex;
-    flex-direction: column;
-  }
-  
+
   .movie-title {
     font-size: 18px;
     font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+    color: #333;
   }
-  
-  .movie-director {
-    font-size: 14px;
-    color: gray;
+
+  .movie-director,
+  .movie-genre {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
   }
-  
-  .movie-image {
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
+
   .movie-description {
     font-size: 14px;
     color: #666;
-    margin-top: 8px;
+    line-height: 1.4;
+    margin: 10px 0;
   }
-  
+
+  .card-buttons {
+    display: flex;
+    justify-content: space-between; /* Distributes buttons evenly */
+    padding: 10px;
+    margin-top: auto; /* Pushes buttons to the bottom of the card */
+  }
+
+  mat-card-content {
+    flex-grow: 1; /* Ensures the description takes up available space */
+  }
+}

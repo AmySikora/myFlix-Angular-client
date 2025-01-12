@@ -1,35 +1,32 @@
-<!-- src/app/movie-card/movie-card.component.html -->
 <div class="movie-card-container">
   <mat-card *ngFor="let movie of movies;" class="movie-card">
-      <mat-card-header>
-        <mat-card-title class="movie-title">{{ movie.Title }}</mat-card-title>
-        <mat-card-subtitle class="movie-director">
-          Directed by: {{ movie.Director.Name }}
-        </mat-card-subtitle>
-      </mat-card-header>
-      <img
-        mat-card-image
-        [src]="movie.ImageURL"
-        [alt]="movie.Title"
-        class="movie-image"
-      />
-      <mat-card-content class="movie-description">
-        <p>{{ movie.Description }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="goToGenre(movie.Genre)">
-          Genre
-        </button>
-        <button mat-raised-button color="primary" (click)="goToDirector(movie.Director)">
-          Director
-        </button>
-        <button mat-raised-button color="primary" (click)="goToDescription(movie)">
-          Description
-        </button>
-        <button mat-icon-button color="warn" aria-label="Add to favorites">
-          <mat-icon>favorite_border</mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    
+    <img
+      mat-card-image
+      [src]="movie.ImageURL"
+      [alt]="movie.Title"
+      class="movie-image"
+    />
+    <mat-card-header>
+      <mat-card-title class="movie-title">{{ movie.Title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="movie-director">Directed by: {{ movie.Director.Name }}</p>
+      <p class="movie-genre">Genre: {{ movie.Genre.Name }}</p>
+      <p class="movie-description">{{ getShortDescription(movie.Description) }}</p>
+    </mat-card-content>
+    <mat-card-actions class="card-buttons">
+      <button mat-raised-button color="primary" (click)="goToGenre(movie.Genre)">
+        Genre
+      </button>
+      <button mat-raised-button color="primary" (click)="goToDirector(movie.Director)">
+        Director
+      </button>
+      <button mat-raised-button color="primary" (click)="goToDescription(movie.Description)">
+        Description
+      </button>
+      <button mat-icon-button color="warn" aria-label="Add to favorites">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

@@ -106,10 +106,9 @@ export class FetchApiDataService {
   }
 
   // Update user details
-  public updateUser(userData: any): Observable<any> {
-    const user = localStorage.getItem('user');
+  public updateUser(username: string, userData: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + `users/${user}`, userData, {
+    return this.http.put(`${apiUrl}users/${username}`, userData, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
@@ -118,6 +117,8 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+  
+
 
   // Delete user account
   public deleteUser(username: string): Observable<any> {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -8,72 +10,127 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  editForm: FormGroup;
   user: any = {};
   favoriteMovies: any[] = [];
 
-  constructor(private fetchApiData: FetchApiDataService, private router: Router) {}
+  constructor(
+    private fetchApiData: FetchApiDataService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
+    this.editForm = this.formBuilder.group({
+      Username: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      Birthday: [''],
+      Password: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
-    this.getUserDetails();
-  }
-  goToMovies(): void {
-    this.router.navigate(['movies'] )
+    const user = localStorage.getItem('user');
+    if (!user) {
+      this.snackBar.open('User data is missing. Please log in again.', 'OK', { duration: 3000 });
+      this.router.navigate(['welcome']);
+      return;
+    }
+
+    this.loadUserProfile();
   }
 
-  logout(): void {
-    this.router.navigate(["welcome"]);
-    localStorage.removeItem("user");
-  }
-  getUserDetails(): void {
-    this.fetchApiData.getUser().subscribe({
-      next: (response) => {
-        this.user = response;
-        this.favoriteMovies = response.FavoriteMovies;
-      },
-      error: (error) => {
-        console.error('Error fetching user details:', error);
-      },
+  loadUserProfile(): void {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.user = user; // Assign user object
+
+    this.editForm.patchValue({
+      Username: user.Username,
+      Email: user.Email,
+      Birthday: user.Birthday ? user.Birthday.split('T')[0] : '',
+    });
+
+    this.fetchApiData.getAllMovies().subscribe((movies: any[]) => {
+      this.favoriteMovies = movies.filter(movie => user.FavoriteMovies?.includes(movie._id) || []);
     });
   }
 
   updateUserProfile(): void {
-    this.fetchApiData.updateUser(this.user).subscribe({
-      next: (response) => {
-        alert('Profile updated successfully!');
+    const updatedUserData = {
+      Username: this.editForm.value.Username,
+      Email: this.editForm.value.Email,
+      Birthday: this.editForm.value.Birthday,
+      Password: this.editForm.value.Password,
+    };
+  
+    const username = this.user.Username; 
+  
+    this.fetchApiData.updateUser(username, updatedUserData).subscribe({
+      next: (res: any) => {
+        console.log('User updated:', res);
+        this.snackBar.open('Profile updated successfully!', 'OK', { duration: 3000 });
+        localStorage.setItem('user', JSON.stringify(res)); 
+        this.loadUserProfile(); 
       },
-      error: (error) => {
-        console.error('Error updating profile:', error);
-        alert('Failed to update profile.');
+      error: (err: any) => {
+        console.error('Error updating profile:', err);
+        this.snackBar.open('Failed to update profile. Please try again.', 'OK', { duration: 3000 });
+      },
+    });
+  }
+  
+
+  fetchUserData(): void {
+    this.fetchApiData.getUser().subscribe({
+      next: (res: any) => {
+        this.user = res;
+        console.log('Fetched user data:', this.user);
+        this.editForm.patchValue({
+          Username: this.user.Username,
+          Email: this.user.Email,
+          Birthday: this.user.Birthday,
+        });
+      },
+      error: (err: any) => {
+        console.error('Error fetching user data:', err);
       },
     });
   }
 
   deleteAccount(): void {
-    if (confirm('Are you sure you want to delete your account?')) {
-      this.fetchApiData.deleteUser(this.user.Username).subscribe({
-        next: () => {
-          alert('Account deleted successfully.');
-          localStorage.clear();
-          this.router.navigate(['/welcome']);
-        },
-        error: (error) => {
-          console.error('Error deleting account:', error);
-          alert('Failed to delete account.');
-        },
-      });
-    }
+    const username = this.user.Username; // Retrieve username from the user object
+
+    this.fetchApiData.deleteUser(username).subscribe(
+      () => {
+        this.snackBar.open('Account deleted successfully.', 'OK', { duration: 3000 });
+        localStorage.clear();
+        this.router.navigate(['welcome']);
+      },
+      (err: any) => {
+        console.error('Error deleting account:', err);
+        this.snackBar.open('Failed to delete account.', 'OK', { duration: 3000 });
+      }
+    );
   }
 
-  deleteFromFavorites(movieId: string): void {
+  removeFromFavorites(movieId: string): void {
     this.fetchApiData.deleteFavorite(movieId).subscribe({
-      next: (response) => {
-        alert('Movie deleted from favorites!');
-        this.favoriteMovies = response.FavoriteMovies;
+      next: () => {
+        this.snackBar.open('Movie removed from favorites.', 'OK', { duration: 3000 });
+        this.loadUserProfile(); 
       },
-      error: (error) => {
-        console.error('Error removing movie from favorites:', error);
-        alert('Failed to delete movie.');
+      error: (err: any) => {
+        console.error('Error removing favorite:', err);
+        this.snackBar.open('Failed to remove movie from favorites.', 'OK', { duration: 3000 });
       },
     });
+  }
+  
+  goToMovies(): void {
+    this.router.navigate(['movies']);
+  }
+
+  logout(): void {
+    this.router.navigate(['welcome']);
+    localStorage.removeItem('user');
   }
 }

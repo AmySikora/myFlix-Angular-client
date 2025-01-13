@@ -16,7 +16,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUserDetails();
   }
+  goToMovies(): void {
+    this.router.navigate(['movies'] )
+  }
 
+  logout(): void {
+    this.router.navigate(["welcome"]);
+    localStorage.removeItem("user");
+  }
   getUserDetails(): void {
     this.fetchApiData.getUser().subscribe({
       next: (response) => {

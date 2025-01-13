@@ -1,3 +1,9 @@
+<div>
+  <nav>
+    <h2>MyFlix Movies</h2>
+    <button mat-button color="primary" (click)="goToProfile()">Profile</button>
+    <button mat-button color="primary" (click)="logout()">Log Out</button>
+  </nav>
 <div class="search-bar-container">
   <mat-form-field appearance="outline" class="search-bar-wrapper">
     <mat-icon matPrefix>search</mat-icon>
@@ -53,7 +59,7 @@
     </mat-card-actions>
   </mat-card>
 </div>
-
+</div>
 <div *ngIf="filteredMovies.length === 0 && searchQuery" class="no-results">
   <p>No results found for "{{ searchQuery }}".</p>
 </div>

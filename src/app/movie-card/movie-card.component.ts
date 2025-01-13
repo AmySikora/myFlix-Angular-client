@@ -74,47 +74,48 @@ export class MovieCardComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe(res => {
-        this.movies = res;
-
-        let user = JSON.parse(localStorage.getItem("user") || "");
-        this.movies.forEach((movie: any) => {
-            movie.isFavorite = user.favoriteMovies.includes(movie._id);
-        })
-        return this.movies;
-    }, err => {
-        console.error(err)
-    })
-  }
+    this.fetchApiData.getAllMovies().subscribe({
+      next: (movies: any[]) => {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        this.movies = movies.map((movie) => ({
+          ...movie,
+          isFavorite: user.favoriteMovies?.includes(movie._id),
+        }));
+        this.filteredMovies = [...this.movies];
+      },
+      error: (err: any) => console.error('Error fetching movies:', err),
+    });
+  }  
 
   modifyFavoriteMovies(movie: any): void {
-    let user = JSON.parse(localStorage.getItem("user") || "");
-    let icon = document.getElementById(`${movie._id}-favorite-icon`);
-
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+  
     if (user.favoriteMovies.includes(movie._id)) {
-        this.fetchApiData.deleteFavorite(movie.id).subscribe(res => {
-            icon?.setAttribute("fontIcon", "favorite_border");
-
-            console.log("deletion successfull")
-            console.log(res);
-            user.favoriteMovies = res.favoriteMovies;
-            localStorage.setItem("user", JSON.stringify(user));
-        }, err => {
-            console.error(err)
-        })
-  } else {
-    this.fetchApiData.addFavoriteMovie(user.id, movie.title).subscribe(res => {
-        icon?.setAttribute("fontIcon", "favorite");
-
-        console.log("successfully added")
-        console.log(res);
-        user.favoriteMovies = res.favoriteMovies;
-        localStorage.setItem("user", JSON.stringify(user));
-    }, err => {
-        console.error(err)
-    })
-}
-localStorage.setItem("user", JSON.stringify(user));
-}
-
+      // Remove from favorites
+      this.fetchApiData.deleteFavorite(movie._id).subscribe({
+        next: (res: any) => {
+          console.log('Successfully removed from favorites:', res);
+          user.favoriteMovies = res.favoriteMovies;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.movies = this.movies.map((m) =>
+            m._id === movie._id ? { ...m, isFavorite: false } : m
+          );
+        },
+        error: (err: any) => console.error('Error removing favorite:', err),
+      });
+    } else {
+      // Add to favorites
+      this.fetchApiData.addFavoriteMovie(movie._id).subscribe({
+        next: (res: any) => {
+          console.log('Successfully added to favorites:', res);
+          user.favoriteMovies = res.favoriteMovies;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.movies = this.movies.map((m) =>
+            m._id === movie._id ? { ...m, isFavorite: true } : m
+          );
+        },
+        error: (err: any) => console.error('Error adding favorite:', err),
+      });
+    }
+  }  
 }

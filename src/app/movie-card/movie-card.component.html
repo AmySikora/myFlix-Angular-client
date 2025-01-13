@@ -53,9 +53,9 @@
       <button mat-raised-button color="primary" (click)="goToDescription(movie)">
         Description
       </button>
-      <button mat-icon-button color="warn" aria-label="Add to favorites">
-        <mat-icon>favorite_border</mat-icon>
-      </button>
+      <button mat-icon-button color="warn" aria-label="Add to favorites" click)="modifyFavoriteMovies(movie)">
+    <mat-icon>{{ movie.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+     </button>
     </mat-card-actions>
   </mat-card>
 </div>

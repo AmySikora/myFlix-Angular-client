@@ -10,8 +10,6 @@ const apiUrl = 'https://myflixmovies123-d3669f5b95da.herokuapp.com/';
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  // Inject the HttpClient module to the constructor params
-  // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {}
 
   // User registration endpoint
@@ -23,7 +21,7 @@ export class FetchApiDataService {
         return throwError(() => error); 
       })
     );
-  }  
+  }
 
   // User login endpoint
   public userLogin(userDetails: { Username: string; Password: string }): Observable<any> {
@@ -32,8 +30,8 @@ export class FetchApiDataService {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
-        return response;
         }
+        return response;
       }),
       catchError(this.handleError)
     );
@@ -133,9 +131,51 @@ export class FetchApiDataService {
       );
   }
 
+  // Profile Page Methods
+  public getUser(): Observable<any> {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + `users/${user}`, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
+  public updateUser(userData: any): Observable<any> {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    return this.http.put(apiUrl + `users/${user}`, userData, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteFavorite(movieId: string): Observable<any> {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    return this.http
+      .delete(apiUrl + `users/${user}/movies/${movieId}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+
   // Non-typed response extraction
   private extractResponseData<T>(res: T): T {
-    return res || {} as T;
+    return res || ({} as T);
   }
 
   // Error handling
@@ -147,6 +187,6 @@ export class FetchApiDataService {
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
       );
     }
-    return throwError('Something bad happened; please try again later.');
+    return Error('Something bad happened; please try again later.');
   }
 }

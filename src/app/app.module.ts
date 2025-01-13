@@ -21,13 +21,13 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { DescriptionComponent } from './description/description.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './profile-page/profile-page.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' } // Corrected pathMatch
+  { path: 'profile', component: ProfileComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' }, 
 ];
 
 @NgModule({
@@ -40,7 +40,6 @@ const appRoutes: Routes = [
     GenreComponent,
     DirectorComponent,
     DescriptionComponent,
-    ProfilePageComponent,
     ProfileComponent,
   ],
   imports: [

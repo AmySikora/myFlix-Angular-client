@@ -37,24 +37,28 @@
   
     <div class="favorite-movies-container">
       <h3>Favorite Movies</h3>
-      <div *ngIf="favoriteMovies.length === 0 && !user.FavoriteMovies">
-        <p>Loading your favorite movies...</p>
-      </div>  
-          
-      <ng-template #favoriteMoviesList>
-        <div class="movies-grid">
-          <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
-            <mat-card-header>
-              <mat-card-title>{{ movie.Title }}</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image [src]="movie.ImageURL || 'https://via.placeholder.com/300x400'" alt="{{ movie.Title }}" />
-            <mat-card-actions>
-              <button mat-button color="primary" (click)="removeFromFavorites(movie._id)">Remove {{ movie.Title }} from favorites"></button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-      </ng-template>
+      <div *ngIf="favoriteMovies.length === 0">
+        <p>You have no favorite movies yet.</p>
+      </div>
+      <div class="movies-grid">
+        <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
+          <mat-card-header>
+            <mat-card-title>{{ movie.Title }}</mat-card-title>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="movie.ImageURL || 'https://via.placeholder.com/300x400'"
+            alt="{{ movie.Title }}"
+          />
+          <mat-card-actions>
+            <button mat-icon-button color="warn" (click)="modifyFavoriteMovies(movie)">
+              <mat-icon>{{ user.FavoriteMovies?.includes(movie._id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+            </button>
+            <button mat-button color="primary" (click)="removeFromFavorites(movie._id)">
+              Remove {{ movie.Title }} from favorites
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
-  </div>
-  
-  
+    

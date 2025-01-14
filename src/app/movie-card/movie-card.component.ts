@@ -11,21 +11,24 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   filteredMovies: any[] = [];
   searchQuery: string = '';
+  user: any = {}; // Add this property
 
   constructor(private fetchApiData: FetchApiDataService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchApiData.getAllMovies().subscribe((movies: any[]) => {
-      this.movies = movies;
-      this.filteredMovies = movies;
-    });
+    this.loadUserData(); // Load user data
+    this.getMovies();
+  }
+
+  loadUserData(): void {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   clearSearch(): void {
     this.searchQuery = '';
-    this.filteredMovies = this.movies; 
+    this.filteredMovies = this.movies;
   }
-  
+
   onSearch(): void {
     const query = this.searchQuery.toLowerCase().trim();
     this.filteredMovies = this.movies.filter((movie) =>
@@ -36,12 +39,12 @@ export class MovieCardComponent implements OnInit {
   }
 
   goToProfile(): void {
-    this.router.navigate(['profile'] )
+    this.router.navigate(['profile']);
   }
 
   logout(): void {
-    this.router.navigate(["welcome"]);
-    localStorage.removeItem("user");
+    this.router.navigate(['welcome']);
+    localStorage.removeItem('user');
   }
 
   goToGenre(genre: any): void {
@@ -76,30 +79,27 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe({
       next: (movies: any[]) => {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
         this.movies = movies.map((movie) => ({
           ...movie,
-          isFavorite: user.favoriteMovies?.includes(movie._id),
+          isFavorite: this.user.FavoriteMovies?.includes(movie._id),
         }));
         this.filteredMovies = [...this.movies];
       },
       error: (err: any) => console.error('Error fetching movies:', err),
     });
-  }  
+  }
 
   modifyFavoriteMovies(movie: any): void {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-  
-    if (user.favoriteMovies.includes(movie._id)) {
+    if (this.user.FavoriteMovies?.includes(movie._id)) {
       // Remove from favorites
       this.fetchApiData.deleteFavorite(movie._id).subscribe({
         next: (res: any) => {
-          console.log('Successfully removed from favorites:', res);
-          user.favoriteMovies = res.favoriteMovies;
-          localStorage.setItem('user', JSON.stringify(user));
+          this.user.FavoriteMovies = res.FavoriteMovies;
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.movies = this.movies.map((m) =>
             m._id === movie._id ? { ...m, isFavorite: false } : m
           );
+          this.filteredMovies = [...this.movies];
         },
         error: (err: any) => console.error('Error removing favorite:', err),
       });
@@ -107,15 +107,15 @@ export class MovieCardComponent implements OnInit {
       // Add to favorites
       this.fetchApiData.addFavoriteMovie(movie._id).subscribe({
         next: (res: any) => {
-          console.log('Successfully added to favorites:', res);
-          user.favoriteMovies = res.favoriteMovies;
-          localStorage.setItem('user', JSON.stringify(user));
+          this.user.FavoriteMovies = res.FavoriteMovies;
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.movies = this.movies.map((m) =>
             m._id === movie._id ? { ...m, isFavorite: true } : m
           );
+          this.filteredMovies = [...this.movies];
         },
         error: (err: any) => console.error('Error adding favorite:', err),
       });
     }
-  }  
+  }
 }

@@ -57,7 +57,6 @@ export class ProfileComponent implements OnInit {
   });
 }
 
-
   updateUserProfile(): void {
     const updatedUserData = {
       Username: this.editForm.value.Username,
@@ -82,7 +81,6 @@ export class ProfileComponent implements OnInit {
     });
   }
   
-
   fetchUserData(): void {
     this.fetchApiData.getUser().subscribe({
       next: (res: any) => {
@@ -101,7 +99,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount(): void {
-    const username = this.user.Username; // Retrieve username from the user object
+    const username = this.user.Username; 
 
     this.fetchApiData.deleteUser(username).subscribe(
       () => {
@@ -151,7 +149,7 @@ export class ProfileComponent implements OnInit {
         this.snackBar.open(`${movie.Title} added to favorites.`, 'OK', { duration: 3000 });
         this.user.FavoriteMovies = res.FavoriteMovies;
         localStorage.setItem('user', JSON.stringify(this.user));
-        this.loadUserProfile(); // Refresh favorite movies
+        this.loadUserProfile(); 
       },
       error: (err: any) => {
         console.error('Error adding favorite:', err);

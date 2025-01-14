@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,12 +13,15 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   filteredMovies: any[] = [];
   searchQuery: string = '';
-  user: any = {}; // Add this property
+  user: any = {};
 
-  constructor(private fetchApiData: FetchApiDataService, private router: Router) {}
+  constructor(
+    private fetchApiData: FetchApiDataService, 
+    private dialog: MatDialog,
+    private router: Router) {}
 
   ngOnInit(): void {
-    this.loadUserData(); // Load user data
+    this.loadUserData(); 
     this.getMovies();
   }
 
@@ -47,29 +52,30 @@ export class MovieCardComponent implements OnInit {
     localStorage.removeItem('user');
   }
 
-  goToGenre(genre: any): void {
-    this.router.navigate(['genre'], {
-      queryParams: {
-        name: genre.Name,
-        description: genre.Description,
+  showGenre(movie: any): void {
+    this.dialog.open(InfoDialogComponent, {
+      data: {
+        title: String(movie.genre.type).toUpperCase(),
+        content: movie.Genre.description
+      },
+      width: '400px',
+    });
+  }
+
+  showDirector(movie: any): void {
+    this.dialog.open(InfoDialogComponent, {
+      data: {
+        title: movie.Director.Name,
+        bio: movie.Director.Bio,
+        birth: movie.Director.Birth,
+        death: movie.Director.Death || '',
       },
     });
   }
 
-  goToDirector(director: any): void {
-    this.router.navigate(['director'], {
-      queryParams: {
-        name: director.Name,
-        bio: director.Bio,
-        birth: director.Birth,
-        death: director.Death || '',
-      },
-    });
-  }
-
-  goToDescription(movie: any): void {
-    this.router.navigate(['description'], {
-      queryParams: {
+  showDescription(movie: any): void {
+    this.dialog.open(InfoDialogComponent, {
+      data: {
         title: movie.Title,
         description: movie.Description,
       },

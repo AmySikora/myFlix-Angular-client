@@ -4,20 +4,20 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-info-dialog',
   templateUrl: './info-dialog.component.html',
-  styleUrls: ['./info-dialog.component.scss']
+  styleUrls: ['./info-dialog.component.scss'],
 })
 export class InfoDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA)
-      public data: {
-        title: string,
-        content: string
-      },
-      public dialogRef: MatDialogRef<InfoDialogComponent>
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: { title: string; content: string },
+    public dialogRef: MatDialogRef<InfoDialogComponent>
   ) {}
 
-      ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Dialog Data:', this.data); 
+  }
 
-      closeInfoDialog(): void {
-        this.dialogRef.close();
-      }
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -53,38 +53,47 @@ export class MovieCardComponent implements OnInit {
   }
 
   showGenre(movie: any): void {
+    console.log('Movie Object:', movie); 
+  
     this.dialog.open(InfoDialogComponent, {
       data: {
-        title: String(movie.genre.type).toUpperCase(),
-        content: movie.Genre.description
+        title: movie.Name || 'Unknown Genre', 
+        content: movie.Description || 'No description available.', 
       },
       width: '400px',
     });
   }
 
   showDirector(movie: any): void {
+    console.log('Movie Object:', movie);
+    
     this.dialog.open(InfoDialogComponent, {
       data: {
-        title: movie.Director.Name,
-        bio: movie.Director.Bio,
-        birth: movie.Director.Birth,
-        death: movie.Director.Death || '',
+        title: movie.Name || 'Unknown Director',
+        content: `${movie.Bio || 'No bio available.'} ${
+          movie.Birth ? `(Born: ${movie.Birth})` : ''
+        } ${movie.Death ? `(Died: ${movie.Death})` : ''}`,
       },
+      width: '400px',
     });
   }
-
+  
+  
   showDescription(movie: any): void {
+    console.log(movie); 
     this.dialog.open(InfoDialogComponent, {
       data: {
-        title: movie.Title,
-        description: movie.Description,
+        title: movie.Title || 'Unknown Title',
+        content: movie.Description || 'No description available.',
       },
+      width: '400px',
     });
   }
-
+  
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe({
       next: (movies: any[]) => {
+        console.log('Movies fetched from API:', movies);
         this.movies = movies.map((movie) => ({
           ...movie,
           isFavorite: this.user.FavoriteMovies?.includes(movie._id),

@@ -1,17 +1,14 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title class="InfoDialogTitle">{{data.title}}</mat-card-title>
+      <mat-card-title class="dialog-title">{{ data.title }}</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="InfoDialogContent">
-        {{data.content}}
+    <mat-card-content class="dialog-content">
+      <p>{{ data.content }}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button
-        mat-raised-button
-        (click)="closeInfoDialog()"
-        color="primary"
-        >
+      <button mat-raised-button color="primary" (click)="closeDialog()">
         Close
-        </button>
+      </button>
     </mat-card-actions>
-</mat-card>
+  </mat-card>
+  

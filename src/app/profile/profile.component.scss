@@ -1,0 +1,96 @@
+.movie-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+  }
+  
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures content is spaced properly */
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px 10px 0 0;
+    }
+  
+    .movie-title {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 0;
+      color: #333;
+    }
+  
+    .movie-director,
+    .movie-genre {
+      font-size: 16px;
+      color: #555;
+      margin: 5px 0;
+    }
+  
+    .movie-description {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.4;
+      margin: 10px 0;
+    }
+  
+    .card-buttons {
+      display: flex;
+      justify-content: space-between; /* Distributes buttons evenly */
+      padding: 10px;
+      margin-top: auto; /* Pushes buttons to the bottom of the card */
+    }
+  
+    mat-card-content {
+      flex-grow: 1; /* Ensures the description takes up available space */
+    }
+  
+    .search-bar-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px; /* Space between the input and buttons */
+      padding-left: 20px; /* Padding from the left margin */
+      margin-bottom: 20px;
+    }
+    
+    .search-bar-wrapper {
+      flex-grow: 1;
+      max-width: 900px; /* Increased max-width for a longer search bar */
+    }
+    
+    .search-bar {
+      width: 100%; /* Take up the full width of the wrapper */
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 20px; /* Rounded corners */
+      border: 2px solid #3f51b5; /* Matches button color */
+      box-shadow: 0 2px 4px rgba(63, 81, 181, 0.2); /* Subtle shadow */
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    
+      &:focus {
+        border-color: #ff5722; /* Highlight color on focus */
+        box-shadow: 0 4px 8px rgba(255, 87, 34, 0.2);
+      }
+    
+      &::placeholder {
+        font-style: italic;
+        color: #aaa;
+      }
+    }  
+  }  
+  @media (max-width: 768px) {
+    .search-bar-wrapper {
+      max-width: 100%; /* Use the full width on smaller screens */
+    }
+  }
+  

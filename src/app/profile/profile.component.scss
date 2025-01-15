@@ -1,23 +1,115 @@
-.movie-card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 20px; /* Space between cards */
-    padding: 20px;
+/* --- Navigation Bar Styling --- */
+nav {
+    background-color: white;
+    color: #3f51b5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 3px solid tomato;
+    flex-wrap: wrap;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+      flex-grow: 1;
+      color: #3f51b5;
+      white-space: nowrap;
+    }
+  
+    button {
+      font-size: 1rem;
+      color: white;
+      background-color: #3f51b5;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 16px;
+      margin-left: 10px;
+      white-space: nowrap;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #2e3a9b;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+  
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+  
+      button {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
   }
   
-  .movie-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ensures content is spaced properly */
-    width: 300px;
+  /* --- Profile View Styling --- */
+  .profile-view-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-form-container form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  button[type="submit"],
+  button[color="warn"] {
+    margin-top: 20px;
+  }
+  
+  /* --- Divider Styling --- */
+  mat-divider {
+    margin: 20px 0;
+    border-color: #ccc;
+  }
+  
+  /* --- Favorite Movies Section --- */
+  .favorite-movies-container {
+    padding: 20px;
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  /* --- Individual Movie Card --- */
+  .movie-card {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   
     img {
       width: 100%;
       height: auto;
-      border-radius: 10px 10px 0 0;
+      border-radius: 8px 8px 0 0;
     }
   
     .movie-title {
@@ -25,8 +117,8 @@
       font-weight: bold;
       text-align: center;
       margin: 10px 0;
-      color: #3f51b5; // Matches theme
-      }
+      color: #3f51b5;
+    }
   
     .movie-director,
     .movie-genre {
@@ -44,42 +136,43 @@
   
     .card-buttons {
       display: flex;
-      justify-content: space-between; /* Distributes buttons evenly */
+      justify-content: space-between;
       padding: 10px;
-      margin-top: auto; /* Pushes buttons to the bottom of the card */
+      margin-top: auto;
     }
   
-    mat-card-content {
-      flex-grow: 1; /* Ensures the description takes up available space */
+    mat-card-actions button {
+      margin-top: 10px;
     }
   }
   
+  /* --- Search Bar Styling --- */
   .search-bar-container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px; /* Space between the input and buttons */
-    padding-left: 20px; /* Padding from the left margin */
+    gap: 10px;
+    padding-left: 20px;
     margin-bottom: 20px;
   }
   
   .search-bar-wrapper {
     flex-grow: 1;
-    max-width: 900px; /* Increased max-width for a longer search bar */
+    max-width: 900px;
   }
   
   .search-bar {
-    width: 100%; /* Take up the full width of the wrapper */
+    width: 100%;
     font-size: 16px;
     padding: 10px;
-    border-radius: 20px; /* Rounded corners */
-    border: 2px solid #3f51b5; /* Matches button color */
-    box-shadow: 0 2px 4px rgba(63, 81, 181, 0.2); /* Subtle shadow */
+    border-radius: 20px;
+    border: 2px solid #3f51b5;
+    box-shadow: 0 2px 4px rgba(63, 81, 181, 0.2);
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   
     &:focus {
-      border-color: #ff5722; /* Highlight color on focus */
+      border-color: #ff5722;
       box-shadow: 0 4px 8px rgba(255, 87, 34, 0.2);
     }
   
@@ -87,116 +180,5 @@
       font-style: italic;
       color: #aaa;
     }
-  }
-  
-  nav {
-    background-color: white; /* Light background for the navbar */
-    color: #3f51b5; /* Matches the "Update Profile" button text color */
-    display: flex;
-    align-items: center; /* Vertically center items */
-    justify-content: space-between; /* Align title on the left, buttons on the right */
-    padding: 15px 20px; /* Add spacing inside the navbar */
-    border-bottom: 3px solid tomato; /* Red underline to match the theme */
-    flex-wrap: wrap; /* Allows wrapping for smaller screens */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  
-    /* Title Styling */
-    h2 {
-      font-size: 2rem; /* Larger font size for the title */
-      font-weight: bold;
-      margin: 0;
-      flex: 1; /* Allow the title to grow and take space */
-      color: #3f51b5; /* Matches the "Update Profile" button color */
-      white-space: nowrap; /* Prevent text wrapping */
-    }
-  
-    /* Buttons Styling */
-    button {
-      font-size: 1rem; /* Button font size */
-      color: white; /* White text */
-      background-color: #3f51b5; /* Same blue as the "Update Profile" button */
-      border: none;
-      border-radius: 5px; /* Rounded corners */
-      padding: 8px 16px; /* Adds padding inside buttons */
-      margin-left: 10px; /* Space between buttons */
-      white-space: nowrap; /* Prevent text wrapping */
-      transition: background-color 0.3s ease; /* Smooth hover effect */
-  
-      &:hover {
-        background-color: #2e3a9b; /* Slightly darker blue on hover */
-      }
-    }
-  
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      flex-direction: column; /* Stack items vertically */
-      align-items: flex-start; /* Align content to the left */
-      padding: 10px; /* Reduce padding */
-  
-      h2 {
-        font-size: 1.5rem; /* Slightly smaller title font size */
-        margin-bottom: 10px; /* Add spacing below the title */
-      }
-  
-      button {
-        margin-left: 0; /* Remove left margin for stacked buttons */
-        width: 100%; /* Full-width buttons for easier tapping */
-        text-align: center; /* Center-align button text */
-        margin-bottom: 10px; /* Space between stacked buttons */
-      }
-    }
-  }
-  
-  .profile-view-container {
-    margin-top: 20px; /* Creates separation below the navbar */
-    padding: 20px; /* Adds padding inside the profile container */
-    background-color: #f9f9f9; /* Light gray background */
-    border-radius: 8px; /* Smoothly rounded corners */
-    margin-bottom: 40px; /* Adds space below the profile container */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  .profile-form-container form {
-    display: grid; /* Use a grid layout */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 20px; /* Adds spacing between form fields */
-  }
-  
-  mat-form-field {
-    width: 100%; /* Ensures form fields take full width */
-  }
-  
-  button[type="submit"],
-  button[color="warn"] {
-    margin-top: 20px; /* Adds space above the buttons */
-  }
-  
-  mat-divider {
-    margin: 20px 0; /* Adds space above and below the divider */
-    border-color: #ccc; /* Light gray color */
-  }
-  
-  .favorite-movies-container {
-    padding: 20px; /* Adds padding around the favorite movies container */
-    background-color: #ffffff; /* White background for contrast */
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  .movies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Adds space between movie cards */
-  }
-  
-  .movie-card {
-    padding: 10px;
-    border: 1px solid #ddd; /* Subtle border */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  mat-card-actions button {
-    margin-top: 10px; /* Adds space above buttons in the movie card */
   }
   

@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,6 +60,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    MatDividerModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],

@@ -1,95 +1,129 @@
-.movie-card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
-  gap: 20px; /* Space between cards */
-  padding: 20px;
-}
-
-.movie-card {
+nav {
+  background-color: white; // Matches the light theme
+  color: #3f51b5; // Matches the button text color
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Ensures content is spaced properly */
-  width: 300px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center; // Vertically center items
+  justify-content: space-between; // Align title and buttons on opposite sides
+  padding: 15px 20px; // Adds consistent padding
+  border-bottom: 3px solid tomato; // Red underline
+  flex-wrap: wrap; // Allows wrapping for smaller screens
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
 
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .movie-title {
-    font-size: 18px;
+  h2 {
+    font-size: 2rem; // Large font for the title
     font-weight: bold;
-    text-align: center;
-    margin: 10px 0;
-    color: #333;
+    margin: 0;
+    flex-grow: 1; // Ensures the title takes up available space
+    color: #3f51b5; // Matches theme color
+    white-space: nowrap; // Prevents text wrapping
   }
 
-  .movie-director,
-  .movie-genre {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0;
+  button {
+    font-size: 1rem; // Button font size
+    color: white; // White text
+    background-color: #3f51b5; // Matches theme color
+    border: none;
+    border-radius: 5px; // Rounded corners
+    padding: 8px 16px; // Adds padding
+    margin-left: 10px; // Space between buttons
+    white-space: nowrap; // Prevents text wrapping
+    transition: background-color 0.3s ease; // Smooth hover effect
+
+    &:hover {
+      background-color: #2e3a9b; // Slightly darker blue on hover
+    }
   }
 
-  .movie-description {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.4;
-    margin: 10px 0;
-  }
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack items vertically
+    align-items: flex-start; // Align content to the left
+    padding: 10px; // Reduce padding
 
-  .card-buttons {
-    display: flex;
-    justify-content: space-between; /* Distributes buttons evenly */
-    padding: 10px;
-    margin-top: auto; /* Pushes buttons to the bottom of the card */
-  }
+    h2 {
+      font-size: 1.5rem; // Slightly smaller title font size
+      margin-bottom: 10px; // Adds spacing below the title
+    }
 
-  mat-card-content {
-    flex-grow: 1; /* Ensures the description takes up available space */
+    button {
+      width: 100%; // Full-width buttons for easier tapping
+      margin-left: 0; // Remove left margin
+      margin-bottom: 10px; // Add space between stacked buttons
+    }
   }
+}
 
   .search-bar-container {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px; /* Space between the input and buttons */
-    padding-left: 20px; /* Padding from the left margin */
-    margin-bottom: 20px;
+    justify-content: center; // Centers the search bar
+    align-items: center; // Aligns content vertically
+    padding: 20px; // Adds spacing around the search bar
+    gap: 10px; // Space between the search input and clear button
+    margin-bottom: 20px; // Adds spacing below the search bar
   }
   
   .search-bar-wrapper {
-    flex-grow: 1;
-    max-width: 900px; /* Increased max-width for a longer search bar */
+    width: 100%;
+    max-width: 700px; // Restricts the width for readability
   }
   
-  .search-bar {
-    width: 100%; /* Take up the full width of the wrapper */
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 20px; /* Rounded corners */
-    border: 2px solid #3f51b5; /* Matches button color */
-    box-shadow: 0 2px 4px rgba(63, 81, 181, 0.2); /* Subtle shadow */
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  .search-bar-container {
+    display: flex;
+    justify-content: center; // Centers the search bar
+    align-items: center; // Aligns content vertically
+    padding: 20px; // Adds spacing around the search bar
+    gap: 10px; // Space between the search input and clear button
+    margin-bottom: 20px; // Adds spacing below the search bar
+  }
   
-    &:focus {
-      border-color: #ff5722; /* Highlight color on focus */
-      box-shadow: 0 4px 8px rgba(255, 87, 34, 0.2);
-    }
-  
-    &::placeholder {
-      font-style: italic;
-      color: #aaa;
-    }
-  }  
-}  
-@media (max-width: 768px) {
   .search-bar-wrapper {
-    max-width: 100%; /* Use the full width on smaller screens */
+    width: 100%;
+    max-width: 700px; // Restricts the width for readability
   }
-}
+  
+  
+  .movie-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Adjusts column count dynamically
+    gap: 20px; // Adds space between cards
+    padding: 20px; // Padding around the grid
+  }
+  
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Ensures content is spaced properly
+    background-color: white; // Light background
+    border-radius: 10px; // Rounded corners
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow
+    overflow: hidden; // Prevents overflow
+  
+    img {
+      width: 100%; // Ensures the image covers the card width
+      height: auto; // Maintains aspect ratio
+      border-radius: 10px 10px 0 0; // Matches card rounding at the top
+    }
+  
+    .movie-title {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 0;
+      color: #3f51b5; // Matches theme
+    }
+  
+    .movie-director,
+    .movie-genre {
+      font-size: 14px;
+      color: #555;
+      margin: 5px 0;
+    }
+  
+    .card-buttons {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin-top: auto; // Pushes buttons to the bottom
+    }
+  }
+  

@@ -27,13 +27,15 @@
         <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="Password" placeholder="Enter current password" required />
-          <mat-hint>Please enter your password to update your profile</mat-hint>
+          <mat-hint>Password required for profile updatese</mat-hint>
         </mat-form-field>
   
         <button mat-raised-button color="primary" type="submit">Update Profile</button>
         <button mat-raised-button color="warn" (click)="deleteAccount()">Delete Account</button>
       </form>
     </div>
+    
+    <mat-divider></mat-divider>
   
     <div class="favorite-movies-container">
       <h3>Favorite Movies</h3>
@@ -51,11 +53,16 @@
             alt="{{ movie.Title }}"
           />
           <mat-card-actions>
+            <!-- Heart Icon Button -->
             <button mat-icon-button color="warn" (click)="modifyFavoriteMovies(movie)">
-              <mat-icon>{{ user.FavoriteMovies?.includes(movie._id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+              <mat-icon>
+                {{ user.FavoriteMovies?.includes(movie._id) ? 'favorite' : 'favorite_border' }}
+              </mat-icon>
             </button>
-            <button mat-button color="primary" (click)="removeFromFavorites(movie._id)">
-              Remove {{ movie.Title }} from favorites
+          
+            <!-- Updated Remove Button -->
+            <button mat-button color="primary" (click)="modifyFavoriteMovies(movie)">
+              Un-heart to Remove {{ movie.Title }} from favorites
             </button>
           </mat-card-actions>
         </mat-card>

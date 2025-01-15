@@ -129,13 +129,12 @@ export class ProfileComponent implements OnInit {
   
   modifyFavoriteMovies(movie: any): void {
   if (this.user.FavoriteMovies?.includes(movie._id)) {
-    // Remove from favorites
     this.fetchApiData.deleteFavorite(movie._id).subscribe({
       next: (res: any) => {
         this.snackBar.open(`${movie.Title} removed from favorites.`, 'OK', { duration: 3000 });
         this.user.FavoriteMovies = res.FavoriteMovies;
         localStorage.setItem('user', JSON.stringify(this.user));
-        this.loadUserProfile(); // Refresh favorite movies
+        this.loadUserProfile(); 
       },
       error: (err: any) => {
         console.error('Error removing favorite:', err);

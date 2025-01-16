@@ -165,5 +165,6 @@ export class ProfileComponent implements OnInit {
   logout(): void {
     this.router.navigate(['welcome']);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 }

@@ -50,6 +50,7 @@ export class MovieCardComponent implements OnInit {
   logout(): void {
     this.router.navigate(['welcome']);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 
   showGenre(movie: any): void {

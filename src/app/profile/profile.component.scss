@@ -112,12 +112,12 @@ nav {
       border-radius: 8px 8px 0 0;
     }
   
-    .movie-title {
-      font-size: 18px;
+    .movie-card .movie-title {
+      font-size: 28px;
       font-weight: bold;
       text-align: center;
       margin: 10px 0;
-      color: #3f51b5;
+      color: #3f51b5 !important; 
     }
   
     .movie-director,
@@ -146,39 +146,5 @@ nav {
     }
   }
   
-  /* --- Search Bar Styling --- */
-  .search-bar-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    padding-left: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .search-bar-wrapper {
-    flex-grow: 1;
-    max-width: 900px;
-  }
-  
-  .search-bar {
-    width: 100%;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 20px;
-    border: 2px solid #3f51b5;
-    box-shadow: 0 2px 4px rgba(63, 81, 181, 0.2);
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  
-    &:focus {
-      border-color: #ff5722;
-      box-shadow: 0 4px 8px rgba(255, 87, 34, 0.2);
-    }
-  
-    &::placeholder {
-      font-style: italic;
-      color: #aaa;
-    }
-  }
+
   

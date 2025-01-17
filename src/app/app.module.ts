@@ -1,3 +1,8 @@
+/**
+ * The root module of the Angular application.
+ * Declares all components, imports necessary modules, and sets up routing for the app.
+ */
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -26,14 +31,20 @@ import { DescriptionComponent } from './description/description.component';
 import { ProfileComponent } from './profile/profile.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
+/**
+ * Defines the application routes and links them to specific components.
+ */
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' }, 
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
 @NgModule({
+  /**
+   * Declares all components used in the application.
+   */
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
@@ -46,6 +57,9 @@ const appRoutes: Routes = [
     ProfileComponent,
     InfoDialogComponent,
   ],
+  /**
+   * Imports modules required for the application, including Angular Material components and routing.
+   */
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -64,7 +78,14 @@ const appRoutes: Routes = [
     MatDividerModule,
     RouterModule.forRoot(appRoutes),
   ],
+  /**
+   * Providers for dependency injection.
+   * Currently, no additional providers are required.
+   */
   providers: [],
+  /**
+   * The root component that Angular creates and inserts into the `index.html` host web page.
+   */
   bootstrap: [AppComponent],
 })
 export class AppModule {}

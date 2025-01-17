@@ -1,90 +1,122 @@
 # MyFlix Angular Client
 
-Welcome to the **MyFlix Angular Client**, the frontend for a movie app that allows users to browse movies, view details about genres and directors, and manage their favorite movies. This project connects to the MyFlix API to deliver a smooth and interactive user experience.
-
-## Development Info
-
-This project was generated using [Angular CLI](https://angular.io/cli) version 16.2.10. It’s designed to showcase a fully functional Angular-based application connected to a RESTful API.
+Welcome to the **MyFlix Angular Client**, a frontend application for a movie database. This app allows users to browse movies, explore genres and directors, manage their profiles, and add favorite movies. The client connects to the [MyFlix API](https://github.com/AmySikora/myFlix-api) to deliver a smooth and interactive user experience.
 
 ---
 
 ## Features
 
-- **Browse Movies**: View a list of all available movies with details like title, genre, director, and description.
+- **Browse Movies**: View a grid of all available movies with details like title, genre, director, and description.
 - **User Profiles**: Manage your profile, update account details, and delete your account if needed.
-- **Favorite Movies**: Add movies to your favorites list or remove them as you like.
-- **Genre & Director Views**: Explore more about specific genres and directors, including descriptions and biographies.
+- **Favorite Movies**: Add or remove movies from your favorites list.
+- **Genre & Director Views**: Learn more about specific genres and directors, including descriptions and biographies.
 - **Authentication**: Secure login and registration with JWT-based authentication.
 
 ---
 
-## Technologies
+## Technologies Used
 
 - **Angular**: Framework for building the user interface.
-- **TypeScript**: For strict type checking and cleaner code.
-- **Angular Material**: For sleek and consistent UI components.
-- **RxJS**: For handling asynchronous operations and data streams.
-- **TypeDoc**: Used to generate project documentation.
+- **TypeScript**: Provides strict type checking and cleaner code.
+- **Angular Material**: Ensures sleek and consistent UI components.
+- **RxJS**: Handles asynchronous operations and data streams.
+- **TypeDoc**: Generates project documentation.
+- **JWT Authentication**: Provides secure user authentication.
 
 ---
 
-## Getting Started
-
 ### Prerequisites
 
-- Install [Node.js](https://nodejs.org/) (v14 or higher recommended).
-- Install Angular CLI globally:
-  ```bash
-  npm install -g @angular/cli
-  ```
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or higher recommended)
+- [Angular CLI](https://angular.io/cli)
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/myFlix-Angular-client.git
+   git clone https://github.com/AmySikora/myFlix-Angular-client.git
    cd myFlix-Angular-client
-   ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Getting Started
 
-3. Run the app locally:
-   ```bash
-   ng serve
-   ```
-   Navigate to `http://localhost:4200/` in your browser.
+### Installation
+
+#### Install Dependencies
+Run the following command to install project dependencies:
+
+```bash
+npm install
+```
+
+#### Run the App Locally
+To start the Angular development server, use:
+
+```bash
+ng serve
+```
+
+#### Open Your Browser
+Navigate to the following URL in your browser:
+
+```plaintext
+http://localhost:4200
+```
 
 ---
 
 ## Scripts
 
-- **Start Dev Server**: `ng serve`
-- **Build for Production**: `ng build`
-- **Run Unit Tests**: `ng test`
-- **Run E2E Tests**: `ng e2e`
+Here are the available scripts for this project:
+
+- **Start Development Server**:
+  ```bash
+  ng serve
+  ```
+- **Build for Production**:
+  ```bash
+  ng build
+  ```
+- **Run Unit Tests**:
+  ```bash
+  ng test
+  ```
+- **Run E2E Tests**:
+  ```bash
+  ng e2e
+  ```
+- **Generate Documentation**:
+  ```bash
+  npx typedoc --tsconfig tsconfig.json --entryPointStrategy expand src/app --out docs
+  ```
 
 ---
 
 ## Documentation
 
-The project is documented using **TypeDoc** to explain how the code works and what each component does.
+This project is documented using **TypeDoc**, explaining the codebase and components.
 
-### How to View Documentation:
-1. The documentation is in the `docs/` folder.
-2. Open `docs/index.html` in your browser to view the documentation.
+### How to View the Documentation
+- The documentation is located in the `docs/` folder.
+- Open `docs/index.html` in your browser to view it.
+
+### Hosted Documentation (Optional)
+- [View the documentation online](#) (if applicable).
 
 ---
 
-## Acknowledgment of AI Usage
+## Acknowledgments
 
-Some this project such as documentation, was generated or enhanced using AI tools like ChatGPT. These tools helped streamline the process of writing documentation.
+Parts of this project, including documentation, were generated or enhanced with the help of AI tools like ChatGPT to streamline the process.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
+---
+
+## Contact
+
+Created by **Amy Sikora** – [Contact Me](mailto:amy.sikora@example.com)

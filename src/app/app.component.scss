@@ -1,17 +1,19 @@
+/* Styles for the main page container */
 .main-page {
-    text-align: center; 
-    margin-top: 20px; 
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: center; 
-    gap: 10px; 
-    margin-top: 20px;
-  }
-  
-  .custom-button {
-    padding: 10px 20px; 
-    font-size: 16px; 
-  }
-  
+  text-align: center; /* Centers all text within the main page */
+  margin-top: 20px; /* Adds spacing above the main page content */
+}
+
+/* Styles for a group of buttons */
+.button-group {
+  display: flex; /* Aligns buttons in a row */
+  justify-content: center; /* Centers the button group horizontally */
+  gap: 10px; /* Adds spacing between buttons */
+  margin-top: 20px; /* Adds spacing above the button group */
+}
+
+/* Styles for individual custom buttons */
+.custom-button {
+  padding: 10px 20px; /* Adds space inside the button */
+  font-size: 16px; /* Sets the font size for button text */
+}

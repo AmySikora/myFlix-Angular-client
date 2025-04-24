@@ -1,6 +1,6 @@
 # MyFlix Angular Client
 
-Welcome to the **MyFlix Angular Client**, a frontend application for a movie database. This app allows users to browse movies, explore genres and directors, manage their profiles, and add favorite movies. The client connects to the [MyFlix API](https://github.com/AmySikora/myFlix-api) to deliver a smooth and interactive user experience.
+Welcome to the **MyFlix Angular Client**, a frontend application for a movie database. This app allows users to browse movies, explore genres and directors, manage their profiles, and add favorite movies. The client connects to the [MyFlix API](https://github.com/AmySikora/movie_api) to deliver a smooth and interactive user experience.
 
 ---
 

@@ -101,6 +101,11 @@ nav {
     color: #3f51b5;
   }
 
+  .clickable {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   .movie-director,
   .movie-genre {
     font-size: 14px;

@@ -38,10 +38,12 @@
       class="movie-image"
     />
     <mat-card-header>
-      <mat-card-title class="movie-title clickable" (click)="showMovieDetails(movie)"
-      >
-      {{ movie.Title }}</mat-card-title>
-    </mat-card-header>
+      <mat-card-title>
+        <span class="movie-title clickable" (click)="showMovieDetails(movie)">
+          {{ movie.Title }}
+        </span>
+      </mat-card-title>
+    </mat-card-header>    
     <mat-card-content>
       <p class="movie-director">Directed by: {{ movie.Director.Name }}</p>
       <p class="movie-genre">Genre: {{ movie.Genre.Name }}</p>

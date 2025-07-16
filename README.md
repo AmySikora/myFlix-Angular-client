@@ -25,6 +25,11 @@ Welcome to the **MyFlix Angular Client**, a frontend application for a movie dat
 
 ---
 
+### Test Credentials
+
+Username: testuser123
+Password: TestPass123
+
 ### Prerequisites
 
 Ensure you have the following installed:

@@ -92,14 +92,15 @@ export class MovieCardComponent implements OnInit {
    * Lets the user open move card when clicking on title.
    */
   showMovieDetails(movie: any): void {
+    console.log('Title clicked:', movie);
     this.dialog.open(InfoDialogComponent, {
       data: {
         title: movie.Title || 'Unknown Title',
-        content: movie.Description || 'No description avaliable'
+        content: movie.Description || 'No description available.'
       },
-      width: '400px',
+      width: '400px'
     });
-  }
+  }  
 
   /**
    * Logs the user out and navigates to the welcome page.
